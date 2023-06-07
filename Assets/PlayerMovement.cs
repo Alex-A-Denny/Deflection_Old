@@ -38,8 +38,8 @@ public class PlayerMovement : MonoBehaviour {
         //boost
         if (Input.GetKeyDown("left shift"))
         {
+
             
-            moveSpeed = 100f;
 
         }
         else {
