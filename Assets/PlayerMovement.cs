@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
     public CharacterController controller;
+    public Rigidbody rig;
     public float moveSpeed = 15f;
     public float gravity = -25f;
     public float jump = 3f;
@@ -18,8 +19,14 @@ public class PlayerMovement : MonoBehaviour {
     public LayerMask groundMask;
     public bool grounded;
 
+
+    void Start(){
+        rig = GetComponent<Rigidbody>();
+    }
+
     // Update is called once per frame
     void Update() {
+ 
 
         grounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
@@ -36,17 +43,10 @@ public class PlayerMovement : MonoBehaviour {
         Vector3 move = transform.right * x + transform.forward * z;
 
         //boost
-        if (Input.GetKeyDown("left shift"))
+        if (Input.GetKey("left shift"))
         {
 
-            
-
-        }
-        else {
-
-
-            moveSpeed = 15f;
-
+            rig.AddForce(rig.mass * transform.forward * 30000f, ForceMode.Impulse);
 
         }
 
@@ -64,4 +64,6 @@ public class PlayerMovement : MonoBehaviour {
         controller.Move(velocity * Time.deltaTime);
 
     }
+
+
 }
